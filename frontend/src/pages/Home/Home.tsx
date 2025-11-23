@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Title from "../../components/Title";
 import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
@@ -13,6 +13,8 @@ const Home = () => {
       }}
     >
       <Title />
+
+      {/* BOX QUE CONTÉM TODOS OS FORMS DO SISTEMA */}
       <Box
         sx={{
           display: "flex",
