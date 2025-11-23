@@ -1,10 +1,12 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const NotFound = () => {
   return (
-    <Container>
-      <Typography>404:notFound</Typography>
-    </Container>
+    <Box>
+      <Typography variant="h1" fontFamily={"monospace"}>
+        404:notFound
+      </Typography>
+    </Box>
   );
 };
 
