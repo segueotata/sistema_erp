@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm/repository/Repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -13,8 +14,23 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const newUser = this.userRepository.create(createUserDto);
-    await this.userRepository.save(newUser);
+    // 1. Desestrutura o DTO para obter a senha
+    const { password, ...userData } = createUserDto;
+
+    // 2. Define o 'salt' (o custo do hashing)
+    const salt = await bcrypt.genSalt(10);
+
+    // 3. Gera o hash da senha usando o salt
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // 4. Cria a Entity com a senha hasheada
+    const user = this.userRepository.create({
+      ...userData,
+      hashed_password: hashedPassword, // Usa o nome da coluna do banco
+    });
+
+    // 5. Salva no banco de dados
+    return this.userRepository.save(user);
   }
 
   async findAll() {

@@ -1,8 +1,16 @@
-import { v4 as uuidv4 } from "uuid";
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  MenuItem,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import TitleIcon from "@mui/icons-material/Title";
 import { Description } from "@mui/icons-material";
+import axios from "axios";
+import type { Task } from "../interfaces/Task";
 
 const AddTaskForm = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -10,18 +18,38 @@ const AddTaskForm = () => {
 
     const data = new FormData(e.currentTarget);
 
-    const task_id = uuidv4();
-
     const task_title = data.get("task_title");
     const task_description = data.get("task_description");
-    const date_from = data.get("date_from");
-    const date_to = data.get("date_to");
+    const task_priority = data.get("task_priority");
+    const task_from = data.get("task_from");
+    const task_to = data.get("task_to");
 
-    console.log("Task ID: " + task_id);
-    console.log("Task Title: " + task_title);
-    console.log("Task Description: " + task_description);
-    console.log("Task From: " + date_from);
-    console.log("Task To: " + date_to);
+    // console.log("Task ID: " + task_id);
+    // console.log("Task Title: " + task_title);
+    // console.log("Task Description: " + task_description);
+    // console.log("Task Priority: " + task_priority);
+    // console.log("Task From: " + task_from);
+    // console.log("Task To: " + task_to);
+
+    const newTask: Task = {
+      task_title: task_title as string,
+      task_description: task_description as string,
+      task_priority: task_priority as string,
+      task_status: "Pending",
+      task_from: new Date(task_from as string),
+      task_to: new Date(task_to as string),
+    };
+
+    axios
+      .post("http://localhost:3000/tasks/create", newTask)
+      .then((response) => {
+        console.log(response.data);
+        alert("Task added successfully!");
+      })
+      .catch((error) => {
+        console.error("There was an error adding the task!", error);
+        alert("Error adding task.");
+      });
   };
 
   return (
@@ -59,7 +87,7 @@ const AddTaskForm = () => {
         <TextField
           type="text"
           name="task_description"
-          variant="standard"
+          variant="outlined"
           placeholder="Task Description..."
           required
           autoComplete="off"
@@ -68,6 +96,20 @@ const AddTaskForm = () => {
           multiline
           rows={3}
         />
+        <TextField
+          name="task_priority"
+          select
+          defaultValue="Low"
+          variant="standard"
+          label="Priority Level"
+          sx={{
+            width: "100%",
+          }}
+        >
+          <MenuItem value="Low">🟢Low</MenuItem>
+          <MenuItem value="Medium">🟡Medium</MenuItem>
+          <MenuItem value="High">🔴High</MenuItem>
+        </TextField>
         <Box
           sx={{
             display: "flex",
@@ -84,7 +126,7 @@ const AddTaskForm = () => {
             <TextField
               type="date"
               variant="standard"
-              name="date_from"
+              name="task_from"
               required
               fullWidth
             />
@@ -98,7 +140,7 @@ const AddTaskForm = () => {
             <TextField
               type="date"
               variant="standard"
-              name="date_to"
+              name="task_to"
               required
               fullWidth
             />

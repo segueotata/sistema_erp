@@ -7,8 +7,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5173', // Permita apenas a origem do seu frontend
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
   });
+
+  // app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
     .setTitle('Task Management ERP API')

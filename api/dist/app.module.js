@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_module_1 = require("./users/users.module");
 const user_entity_1 = require("./users/entities/user.entity");
+const tasks_module_1 = require("./tasks/tasks.module");
+const task_entity_1 = require("./tasks/entities/task.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,10 +28,12 @@ exports.AppModule = AppModule = __decorate([
                 username: process.env.DB_USERNAME || 'admin',
                 password: process.env.DB_PASSWORD || 'admin',
                 database: process.env.DB_NAME || 'erp_database',
-                entities: [user_entity_1.User],
+                entities: [user_entity_1.User, task_entity_1.Task],
                 synchronize: true,
+                logging: true,
             }),
             users_module_1.UsersModule,
+            tasks_module_1.TasksModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

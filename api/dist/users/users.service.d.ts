@@ -5,7 +5,7 @@ import { Repository } from 'typeorm/repository/Repository';
 export declare class UsersService {
     private userRepository;
     constructor(userRepository: Repository<User>);
-    create(createUserDto: CreateUserDto): Promise<void>;
+    create(createUserDto: CreateUserDto): Promise<User>;
     findAll(): Promise<User[]>;
     getByUuid(uuid: string): Promise<User | null>;
     update(id: number, updateUserDto: UpdateUserDto): string;

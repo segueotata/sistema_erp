@@ -1,7 +1,8 @@
 export interface Task {
-  task_id: string;
   task_title: string;
   task_description: string;
-  date_from: Date;
-  date_to: Date;
+  task_priority: string;
+  task_status: string;
+  task_from: Date;
+  task_to: Date;
 }

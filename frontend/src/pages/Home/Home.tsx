@@ -18,8 +18,8 @@ const Home = () => {
       <Box
         sx={{
           display: "flex",
+          flexWrap: "wrap",
           justifyContent: "center",
-          // flexDirection: "column",
           alignItems: "center",
           gap: "1em",
           bgcolor: "wheat",

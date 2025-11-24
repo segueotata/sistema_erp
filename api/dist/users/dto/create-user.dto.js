@@ -14,7 +14,7 @@ const swagger_1 = require("@nestjs/swagger");
 class CreateUserDto {
     username;
     email;
-    hashed_password;
+    password;
     permission;
 }
 exports.CreateUserDto = CreateUserDto;
@@ -38,7 +38,7 @@ __decorate([
         description: 'Hashed password for the user account',
     }),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "hashed_password", void 0);
+], CreateUserDto.prototype, "password", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'admin',
