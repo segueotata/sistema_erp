@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
-import axios from "axios";
 import { useState, useEffect } from "react"; // 👈 Importar useEffect
+import axios from "axios";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -44,7 +44,8 @@ const TaskList = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "100%",
+        width: "50%",
+        height: "max-content",
       }}
       elevation={2}
     >

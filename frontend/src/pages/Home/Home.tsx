@@ -4,6 +4,7 @@ import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
 import AddTaskForm from "../../components/AddTaskForm";
 import TaskList from "../../components/TaskList";
+import UserList from "../../components/UserList";
 
 const Home = () => {
   return (
@@ -36,15 +37,17 @@ const Home = () => {
       <Box
         sx={{
           display: "flex",
-          flexWrap: "wrap",
-          // justifyContent: "center",
-          alignItems: "center",
+          flexDirection: "row",
+          // flexWrap: "wrap",
+          justifyContent: "center",
+          // alignItems: "center",
           gap: "1em",
           bgcolor: "whitesmoke",
           p: "1em",
         }}
       >
         <TaskList />
+        <UserList />
       </Box>
     </Box>
   );
